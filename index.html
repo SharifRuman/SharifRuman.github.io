@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MQTT</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css'
+      rel='stylesheet' />
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin="" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"
+      type="text/javascript"></script>
+    <link rel="stylesheet" href="dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="dist/MarkerCluster.Default.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <div id="mqttform" class="leaflet-bar">
+      <b>
+        <div class="messages" id="messages" role="alert">
+          Message Box
+        </div>
+      </b>
+      <br>
+      <br>
+      <form name="connform" action="" onsubmit="return MQTTconnect()">
+        <label><b>Server:</b></label>
+        <input type="text" value="test.mosquitto.org" name="server">
+        <br>
+        <br>
+        <label><b>Port:</b></label>
+        <input type="text" value="8081" name="port">
+        <br>
+        <br>
+        <input type="submit" value="Start">
+        <input type="button" name="disconn" value="End" onclick="disconnect()">
+        <br>
+        <br>
+        <div class="status" id="status">Server Status: Not Connected</div>
+      </form>
+      <br>
+      <br>
+      <form name="subs" action="" onsubmit="return sub_topics()">
+        <label><b>Subscribe to a Topic:</b></label>
+        <input type="Stext" name="Stopic"
+          value="ENGO651/Md_Sharif_Uddin_Ruman/My_Temperature">
+        <br>
+        <br>
+        <input type="submit" value="Subscribe">
+      </form>
+      <br>
+      <br>
+      <form name="smessage" action="" onsubmit="return send_message()">
+        <label><b>Message:</b></label>
+        <input type="text" name="message">
+        <br>
+        <br>
+        <label><b>Publish Topic:</b></label>
+        <input type="text" name="Ptopic">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+      </form>
+      <br>
+      <br>
+      <form id="mapStatus">
+        <label for="courseName"><b>Course: </b></label>
+        <input type="text" name="course" value="ENGO651">
+        <br>
+        <br>
+        <label for="yourName"><b>Your Name: </b></label>
+        <input type="text" name="name" value="Md_Sharif_Uddin_Ruman">
+        <br>
+        <br>
+        <input id="shareMyStatus"type="button" value="Share My Status" onclick="shareStatus()">  
+    </form>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+    <script type="text/javascript" src="dist/leaflet.markercluster-src.js"></script>
+    <script type="text/javascript" src="dist/leaflet.ajax.js"></script>
+    <script src="assets/map.js"></script>
+
+  </body>
+</html>
