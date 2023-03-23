@@ -16,7 +16,7 @@ function onFailure(msg) {
 }
 
 function onMessageArrived(rec_msg) {
-    if(isJson(rec_msg.payloadString)){
+    if (isJson(rec_msg.payloadString)) {
         updateMap(rec_msg.payloadString);
     } else {
         message = tmpVar;
@@ -52,42 +52,42 @@ function onConnect() {
 function disconnect() {
     if (connected_flag == 1)
         document.getElementById("status").innerHTML = "Disconnected";
-        mqtt.disconnect();
+    mqtt.disconnect();
 }
 
 
 function MQTTconnect() {
-  document.getElementById("messages").innerHTML = "";
-  var s = document.forms["connform"]["server"].value;
-  var p = document.forms["connform"]["port"].value;
-  if (p != "") {
-      console.log("ports");
-      port = parseInt(p);
-      console.log("port" + port);
-  }
-  if (s != "") {
-      host = s;
-      console.log("host");
-  }
-  console.log("connecting to " + host + " " + port);
-  var ranNum = Math.floor(Math.random() * 1000);
-  var cname = "ClientName-" + ranNum;
-  mqtt = new Paho.MQTT.Client(host, port, cname);
- 
-  var options = {
-      useSSL: true,
-      timeout: 4000,
-      
-      onSuccess: onConnect,
-      onFailure: onFailure,
+    document.getElementById("messages").innerHTML = "";
+    var s = document.forms["connform"]["server"].value;
+    var p = document.forms["connform"]["port"].value;
+    if (p != "") {
+        console.log("ports");
+        port = parseInt(p);
+        console.log("port" + port);
+    }
+    if (s != "") {
+        host = s;
+        console.log("host");
+    }
+    console.log("connecting to " + host + " " + port);
+    var ranNum = Math.floor(Math.random() * 1000);
+    var cname = "ClientName-" + ranNum;
+    mqtt = new Paho.MQTT.Client(host, port, cname);
 
-  };
-  mqtt.connect(options);
+    var options = {
+        useSSL: true,
+        timeout: 4000,
 
-  mqtt.onMessageArrived = onMessageArrived;
-  mqtt.onConnectionLost = onConnectionLost;
+        onSuccess: onConnect,
+        onFailure: onFailure,
 
-  return false;
+    };
+    mqtt.connect(options);
+
+    mqtt.onMessageArrived = onMessageArrived;
+    mqtt.onConnectionLost = onConnectionLost;
+
+    return false;
 }
 
 function sub_topics() {
@@ -99,10 +99,10 @@ function sub_topics() {
         return false;
     }
     var stopic = document.forms["subs"]["Stopic"].value;
-    document.getElementById("messages").innerHTML ="You are subscribe to " + stopic;
+    document.getElementById("messages").innerHTML = "You are subscribe to " + stopic;
     console.log("You are subscribe to " + stopic);
     mqtt.subscribe(stopic);
-    
+
     return false;
 }
 
@@ -130,42 +130,42 @@ function send_message() {
 
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hhcmlmcnVtYW4iLCJhIjoiY2xmNTV5N3JqMGZ0MzNxcXJ1amJrM3U5eSJ9.o6ps2oN5TcXgMKy5ArEJWA';
 var map = L.mapbox.map('map')
-  .setView([51.0448, -114.064], 11)
-  .addLayer(L.mapbox.styleLayer('mapbox://styles/sharifruman/clf5e1xes002i01pwo6ix6auh'));
+    .setView([51.0448, -114.064], 11)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/sharifruman/clf5e1xes002i01pwo6ix6auh'));
 
 var RedIcon = L.icon({
     iconUrl: 'assets/Red.png',
 
     iconSize: [50, 50],
-    iconAnchor: [25, 50], 
+    iconAnchor: [25, 50],
     popupAnchor: [0, -30]
 });
 
 var BlueIcon = L.icon({
-  iconUrl: 'assets/Blue.png',
+    iconUrl: 'assets/Blue.png',
 
-  iconSize: [50, 50],
-  iconAnchor: [25, 50],
-  popupAnchor: [0, -30]
+    iconSize: [50, 50],
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -30]
 });
 
 var GreenIcon = L.icon({
-  iconUrl: 'assets/Green.png',
+    iconUrl: 'assets/Green.png',
 
-  iconSize: [50, 50],
-  iconAnchor: [25, 50],
-  popupAnchor: [0, -30]
+    iconSize: [50, 50],
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -30]
 });
 
 function updateMap(msg) {
     try {
-        
+
         var temp = JSON.parse(msg);
         var lat = temp.latitude;
         var lon = temp.longitude;
         var temp = temp.temperature;
-        document.getElementById("messages").innerHTML = "Published Location: {Latitude: " + lat + "Longitude: " + lon + " Temperature: " + temp +"}";
-  
+        document.getElementById("messages").innerHTML = "Published Location: {Latitude: " + lat + "Longitude: " + lon + " Temperature: " + temp + "}";
+
         if (temp < 10) {
             var marker = L.marker([lat, lon], { icon: BlueIcon });
         } else if (temp > 29) {
@@ -180,67 +180,67 @@ function updateMap(msg) {
         document.getElementById("messages").innerHTML = "Invalid JSON";
         console.log("Invalid JSON");
     }
-  }
+}
 
 function shareStatus() {
-  const message = document.querySelector('#mapStatus');
+    const message = document.querySelector('#mapStatus');
 
-  if (!navigator.geolocation) {
-      message.textContent = `Your browser doesn't support Geolocation`;
-      message.classList.add('error');
-      return;
-  }
-
-  const btn = document.querySelector('#shareMyStatus');
-  btn.addEventListener('click', function () {
-      
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  });
-  
-  function getRndInteger(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) ) + min;
+    if (!navigator.geolocation) {
+        message.textContent = `Your browser doesn't support Geolocation`;
+        message.classList.add('error');
+        return;
     }
 
-  function onSuccess(position) {
+    const btn = document.querySelector('#shareMyStatus');
+    btn.addEventListener('click', function () {
 
-      const {
-          latitude,
-          longitude
-      } = position.coords;
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    });
 
-      const min = -40;
-      const max = 60;
-      var temperature = getRndInteger(min,max)
+    function getRandomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-      var lat = latitude.toString();
-      var lon = longitude.toString();
-      var temp = temperature.toString();
+    function onSuccess(position) {
 
-      var geojson = '{"latitude": ' + lat + ', "longitude": ' + lon + ', "temperature": ' + temp + '}';
+        const {
+            latitude,
+            longitude
+        } = position.coords;
 
-      document.getElementById("status").innerHTML = "";
+        const min = -40;
+        const max = 60;
+        var temperature = getRandomInteger(min, max)
 
-      var name = document.forms["mapStatus"]["name"].value;
-      
-      var course = document.forms["mapStatus"]["course"].value;
-      if(name == "" || course ==""){
-          name = "Test_Name"
-          course = "Test_Course"
-      }
-      topic = course + "/" + name + "/My_Temperature";
-      var msgjson = new Paho.MQTT.Message(geojson);
-      msgjson.destinationName = topic;
-      
-      mqtt.subscribe(topic);
-      mqtt.send(msgjson);
-      console.log("Message: " + geojson + " sent to topic: " + topic)
-      document.getElementById("messages").innerHTML = "GeoJSON: " + geojson + " sent to " + topic;
-  }
+        var lat = latitude.toString();
+        var lon = longitude.toString();
+        var temp = temperature.toString();
 
-  function onError() {
-      message.classList.add('error');
-      message.textContent = `Failed to get your location!`;
-  }
+        var geojson = '{"latitude": ' + lat + ', "longitude": ' + lon + ', "temperature": ' + temp + '}';
+
+        document.getElementById("status").innerHTML = "";
+
+        var name = document.forms["mapStatus"]["name"].value;
+
+        var course = document.forms["mapStatus"]["course"].value;
+        if (name == "" || course == "") {
+            name = "Test_Name"
+            course = "Test_Course"
+        }
+        topic = course + "/" + name + "/My_Temperature";
+        var msgjson = new Paho.MQTT.Message(geojson);
+        msgjson.destinationName = topic;
+
+        mqtt.subscribe(topic);
+        mqtt.send(msgjson);
+        console.log("Message: " + geojson + " sent to topic: " + topic)
+        document.getElementById("messages").innerHTML = "GeoJSON: " + geojson + " sent to " + topic;
+    }
+
+    function onError() {
+        message.classList.add('error');
+        message.textContent = `Failed to get your location!`;
+    }
 
 
 };
