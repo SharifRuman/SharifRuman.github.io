@@ -5,6 +5,10 @@
 
 For this project I will built a web application which uses the javascript geolocation API and turn any smartphone into an IoT sensor and I will also build a web mapping application to visualize the location of the smartphone sensor. 
 
+### DEMO
+
+[DEMO](https://sharifruman.github.io)
+
 ##### Broker Host 
 
 [Mosquitto (PORT: 8081)](https://test.mosquitto.org) 
