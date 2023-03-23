@@ -1,54 +1,54 @@
 #map {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 #mqttform {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    padding: 1em;
-    background: white;
+  position: relative;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  padding: 1em;
+  background: white;
 }
 
-  #mqttform input {
-    display: inline-block;
-    border: 1px solid #999;
-    font-size: 14px;
-    border-radius: 4px;
-    height: 28px;
-    line-height: 28px;
-    padding: 1 1 em;
+#mqttform input {
+  display: inline-block;
+  border: 1px solid #999;
+  font-size: 14px;
+  border-radius: 4px;
+  height: 28px;
+  line-height: 28px;
+  padding: 1 1 em;
 }
 
-  #mqttform input[type="submit"] {
-    box-sizing: content-box;
-    padding: 0 1em;
-    text-transform: uppercase;
-    color: white;
-    background: #088864;
-    border-color: #17d767;  
+#mqttform input[type="submit"] {
+  box-sizing: content-box;
+  padding: 0 1em;
+  text-transform: uppercase;
+  color: white;
+  background: #088864;
+  border-color: #17d767;
 }
 
-  #mqttform input[type="button"] {
-    box-sizing: content-box;
-    padding: 0 1em;
-    text-transform: uppercase;
-    color: white;
-    background: #7b1121;
-    border-color: #840b0b;
+#mqttform input[type="button"] {
+  box-sizing: content-box;
+  padding: 0 1em;
+  text-transform: uppercase;
+  color: white;
+  background: #7b1121;
+  border-color: #840b0b;
 }
 
-  #mqttform input[type="Stext"] {
-    display: inline-block;
-    border: 1px solid #999;
-    font-size: 14px;
-    border-radius: 4px;
-    height: 28px;
-    line-height: 28px;
-    padding: 1 1 em;
-    width: 65%;  
+#mqttform input[type="Stext"] {
+  display: inline-block;
+  border: 1px solid #999;
+  font-size: 14px;
+  border-radius: 4px;
+  height: 28px;
+  line-height: 28px;
+  padding: 1 1 em;
+  width: 65%;
 }
 
 #messages {
@@ -67,7 +67,7 @@
 #status {
   background-color: #062047;
   min-height: 10px;
-  width: 200px;
+  width: 280px;
   max-width: 50%;
   border-radius: 12px;
   padding: 10px 10px 10px 10px;
